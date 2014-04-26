@@ -6,14 +6,15 @@ class CurrencyCode
     const SEK = "SEK";
     const EUR = "EUR";
 
-    public static function ConstantToString($value) {
+    public static function ConstantToString($value) 
+    {
         switch (strtoupper($value)) {
-            case "SEK":
-                return "SEK";
-            case "EUR":
-                return "EUR";
+            case self::SEK:
+                    return self::SEK;
+            case self::EUR:
+                return self::EUR;
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApiException("Invalid currency: $value");
         }
     }
 }

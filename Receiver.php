@@ -12,10 +12,10 @@ class Receiver
     const FORMAT_STRING = "receiverList.receiver(%d).%s";
 
     public function __construct($email, $amount, $firstName = null, $lastName = null, $isPrimary = true) {
-        $this->email = $email;
-        $this->amount = $amount;
+        $this->email     = $email;
+        $this->amount    = $amount;
         $this->firstName = $firstName;
-        $this->lastName = $lastName;
+        $this->lastName  = $lastName;
         $this->isPrimary = $isPrimary;
     }
 
@@ -43,7 +43,8 @@ class Receiver
 		$this->isPrimary = $isPrimary;
 	}
 	
-    public static function parseReceivers($data) {
+    public static function parseReceivers($data) 
+    {
         $receivers = array();
 
         $i = 0;
@@ -61,7 +62,8 @@ class Receiver
         return $receivers;
     }
 
-    public static function addReceiversToOutput($items, &$output) {
+    public static function addReceiversToOutput($items, &$output) 
+    {
         $i = 0;
         foreach ($items as $item) {
             $output[sprintf(self::FORMAT_STRING, $i, "email")] = $item->getEmail();

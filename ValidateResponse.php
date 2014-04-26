@@ -3,27 +3,27 @@ namespace PaysonAPI;
 
 class ValidateResponse 
 {
+    const VERIFIED = "VERIFIED";
+
     protected $response;
     protected $paymentDetails;
 
-    public function __construct($paymentDetails, $responseData) {
+    public function __construct($paymentDetails, $responseData) 
+    {
         $this->paymentDetails = new PaymentDetails($paymentDetails);
-
         $this->response = $responseData;
     }
 
     /**
      * Returns true if the request was verified by Payson
-     *
      * @return bool
      */
     public function isVerified() {
-        return $this->response == "VERIFIED";
+        return strcmp($this->response, self::VERIFIED) == 0;
     }
 
     /**
      * Returns the details about the payments.
-     *
      * @return PaymentDetails
      */
     public function getPaymentDetails() {

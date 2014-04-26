@@ -7,16 +7,14 @@ class LocaleCode
     const ENGLISH = "EN";
     const FINNISH = "FI";
 
-    public static function ConstantToString($value) {
+    public static function ConstantToString($value) 
+    {
         switch (strtoupper($value)) {
-            case "SV":
-                return "SV";
-            case "FI":
-                return "FI";
-            case "EN":
-                return "EN";
+            case self::SV: return self::SV;
+            case self::FI: return self::FI;
+            case self::EN: return self::EN;
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApiException("Invalid locale code $value");
         }
     }
 }

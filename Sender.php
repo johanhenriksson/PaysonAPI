@@ -25,7 +25,8 @@ class Sender
         return $this->lastName;
     }
 
-    public function addSenderToOutput(&$output) {
+    public function addSenderToOutput(&$output) 
+    {
         $output["senderEmail"] = $this->getEmail();
         $output["senderFirstName"] = $this->getFirstName();
         $output["senderLastName"] = $this->getLastName();

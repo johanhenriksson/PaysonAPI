@@ -24,78 +24,39 @@ class PaymentDetails
     protected $shippingAddressCity;
     protected $shippingAddressCountry;
 
-    public function __construct($responseData) {
+    public function __construct($responseData) 
+    {
         $this->orderItems = OrderItem::parseOrderItems($responseData);
         $this->receivers = Receiver::parseReceivers($responseData);
 
-        if (isset($responseData["token"])) {
-            $this->token = $responseData["token"];
-        }
+        $this->token                        = $this->getResponseField($responseData, "token");
+        $this->status                       = $this->getResponseField($responseData, "status");
+        $this->invoiceStatus                = $this->getResponseField($responseData, "invoiceStatus");
+        $this->guaranteeStatus              = $this->getResponseField($responseData, "guaranteeStatus");
+        $this->guaranteeDeadlineTimestamp   = $this->getResponseField($responseData, "guaranteeDeadlineTimestamp");
+        $this->shippingAddressName          = $this->getResponseField($responseData, "shippingAddress.name");
+        $this->shippingAddressStreetAddress = $this->getResponseField($responseData, "shippingAddress.streetAddress");
+        $this->shippingAddressPostalCode    = $this->getResponseField($responseData, "shippingAddress.postalCode");
+        $this->shippingAddressCity          = $this->getResponseField($responseData, "shippingAddress.city");
+        $this->shippingAddressCountry       = $this->getResponseField($responseData, "shippingAddress.country");
+        $this->receiverFee                  = $this->getResponseField($responseData, "receiverFee");
+        $this->type                         = $this->getResponseField($responseData, "type");
+        $this->currencyCode                 = $this->getResponseField($responseData, "currencyCode");
+        $this->custom                       = $this->getResponseField($responseData, "custom");
+        $this->trackingId                   = $this->getResponseField($responseData, "trackingId");
+        $this->correlationId                = $this->getResponseField($responseData, "correlationId");
+        $this->purchaseId                   = $this->getResponseField($responseData, "purchaseId");
+        $this->senderEmail                  = $this->getResponseField($responseData, "senderEmail");
+    }
 
-        if (isset($responseData["status"])) {
-            $this->status = $responseData["status"];
-        }
-        if (isset($responseData["invoiceStatus"])) {
-            $this->invoiceStatus = $responseData["invoiceStatus"];
-        }
-
-        if (isset($responseData["guaranteeStatus"])) {
-            $this->guaranteeStatus = $responseData["guaranteeStatus"];
-        }
-
-        if (isset($responseData["guaranteeDeadlineTimestamp"])) {
-            $this->guaranteeDeadlineTimestamp = $responseData["guaranteeDeadlineTimestamp"];
-        }
-
-        if (isset($responseData["shippingAddress.name"])) {
-            $this->shippingAddressName = $responseData["shippingAddress.name"];
-        }
-        if (isset($responseData["shippingAddress.streetAddress"])) {
-            $this->shippingAddressStreetAddress = $responseData["shippingAddress.streetAddress"];
-        }
-        if (isset($responseData["shippingAddress.postalCode"])) {
-            $this->shippingAddressPostalCode = $responseData["shippingAddress.postalCode"];
-        }
-        if (isset($responseData["shippingAddress.city"])) {
-            $this->shippingAddressCity = $responseData["shippingAddress.city"];
-        }
-        if (isset($responseData["shippingAddress.country"])) {
-            $this->shippingAddressCountry = $responseData["shippingAddress.country"];
-        }
-
-        if (isset($responseData["receiverFee"])) {
-            $this->receiverFee = $responseData["receiverFee"];
-        }
-
-        if (isset($responseData["type"])) {
-            $this->type = $responseData["type"];
-        }
-
-        if (isset($responseData["currencyCode"])) {
-            $this->currencyCode = $responseData["currencyCode"];
-        }
-
-        if (isset($responseData["custom"])) {
-            $this->custom = $responseData["custom"];
-        }
-        if (isset($responseData["trackingId"])) {
-            $this->trackingId = $responseData["trackingId"];
-        }
-        if (isset($responseData["correlationId"])) {
-            $this->correlationId = $responseData["correlationId"];
-        }
-        if (isset($responseData["purchaseId"])) {
-            $this->purchaseId = $responseData["purchaseId"];
-        }
-
-        if (isset($responseData["senderEmail"])) {
-            $this->senderEmail = $responseData["senderEmail"];
-        }
+    protected function getResponseField(array &$response, $field) {
+        if isset($response[$field])
+            return $response[$field];
+        return "";
     }
 
     /**
      * Get array of OrderItem objects
-     *
      * @return array
      */
     public function getOrderItems() {
@@ -104,7 +65,6 @@ class PaymentDetails
 
     /**
      * Get array of Receiver objects
-     *
      * @return array
      */
     public function getReceivers() {
@@ -112,8 +72,8 @@ class PaymentDetails
     }
 
     /**
-     *
-     * @return
+     * Get payment token
+     * @return string
      */
     public function getToken() {
         return $this->token;
@@ -121,7 +81,6 @@ class PaymentDetails
 
     /**
      * Get status of the payment
-     *
      * @return string
      */
     public function getStatus() {
@@ -130,7 +89,6 @@ class PaymentDetails
 
     /**
      * Get type of the payment
-     *
      * @return string
      */
     public function getType() {
@@ -139,7 +97,6 @@ class PaymentDetails
 
     /**
      * Get currency code of the payment
-     *
      * @return string
      */
     public function getCurrencyCode() {
@@ -148,7 +105,6 @@ class PaymentDetails
 
     /**
      * Get custom field of the payment
-     *
      * @return string
      */
     public function getCustom() {
@@ -157,7 +113,6 @@ class PaymentDetails
 
     /**
      * Get trackingId field of the payment
-     *
      * @return string
      */
     public function getTrackingId() {
@@ -166,8 +121,7 @@ class PaymentDetails
 
     /**
      * Get the correlation id for the payment
-     *
-     * @return
+     * @return 
      */
     public function getCorrelationId() {
         return $this->correlationId;
@@ -175,8 +129,7 @@ class PaymentDetails
 
     /**
      * Get purchase id for the payment
-     *
-     * @return
+     * @return 
      */
     public function getPurchaseId() {
         return $this->purchaseId;
@@ -184,8 +137,7 @@ class PaymentDetails
 
     /**
      * Get email address of the sender of the payment
-     *
-     * @return
+     * @return string
      */
     public function getSenderEmail() {
         return $this->senderEmail;
@@ -193,8 +145,7 @@ class PaymentDetails
 
     /**
      * Get the detailed status of an invoice payment
-     *
-     * @return
+     * @return string
      */
     public function getInvoiceStatus() {
         return $this->invoiceStatus;
@@ -202,8 +153,7 @@ class PaymentDetails
 
     /**
      * Get the detailed status of an guarantee payment
-     *
-     * @return
+     * @return string
      */
     public function getGuaranteeStatus() {
         return $this->guaranteeStatus;
@@ -211,7 +161,6 @@ class PaymentDetails
 
     /**
      * Get the next deadline of a guarantee payment
-     *
      * @return
      */
     public function getGuaranteeDeadlineTimestamp() {
@@ -220,7 +169,6 @@ class PaymentDetails
 
     /**
      * Get the name of an invoice payment
-     *
      * @return
      */
     public function getShippingAddressName() {
@@ -229,7 +177,6 @@ class PaymentDetails
 
     /**
      * Get the street address of an invoice payment
-     *
      * @return
      */
     public function getShippingAddressStreetAddress() {
@@ -238,7 +185,6 @@ class PaymentDetails
 
     /**
      * Get the postal code of an invoice payment
-     *
      * @return
      */
     public function getShippingAddressPostalCode() {
@@ -247,7 +193,6 @@ class PaymentDetails
 
     /**
      * Get the city of an invoice payment
-     *
      * @return
      */
     public function getShippingAddressCity() {
@@ -256,7 +201,6 @@ class PaymentDetails
 
     /**
      * Get the country of an invoice payment
-     *
      * @return
      */
     public function getShippingAddressCountry() {
@@ -271,7 +215,9 @@ class PaymentDetails
         return $this->receiverFee;
     }
 
-    public function __toString() {
+    /* TODO: rewrite or just remove this */
+    public function __toString() 
+    {
         $receiversString = "";
         foreach ($this->receivers as $receiver) {
             $receiversString = $receiversString . "\t" . $receiver . "\n";

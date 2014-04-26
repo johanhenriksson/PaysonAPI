@@ -26,7 +26,6 @@ class ResponseEnvelope
 
     /**
      * Returns an array with errors if any
-     * 
      * @return PaysonApiError[]
      */
     public function getErrors() {
@@ -35,7 +34,6 @@ class ResponseEnvelope
 
     /**
      * Returns a string representation of the ResponseEnvelope
-     * 
      * @return string
      */
     public function __toString() {
@@ -43,18 +41,20 @@ class ResponseEnvelope
                 "timestamp: " . $this->timestamp . "\n";
     }
 
-    private function parseErrors($output) {
+    private function parseErrors($output) 
+    {
         $errors = array();
-
         $i = 0;
         while (isset($output[sprintf("errorList.error(%d).message", $i)])) {
             $errors[$i] = new PaysonApiError(
-                    $output[sprintf("errorList.error(%d).errorId", $i)], $output[sprintf("errorList.error(%d).message", $i)], isset($output[sprintf("errorList.error(%d).parameter", $i)]) ?
-                            $output[sprintf("errorList.error(%d).parameter", $i)] : null
+                $output[sprintf("errorList.error(%d).errorId", $i)], 
+                $output[sprintf("errorList.error(%d).message", $i)], 
+                isset($output[sprintf("errorList.error(%d).parameter", $i)]) 
+                    ? $output[sprintf("errorList.error(%d).parameter", $i)] 
+                    : null
             );
             $i++;
         }
-
         return $errors;
     }
 }

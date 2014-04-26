@@ -1,6 +1,8 @@
 <?php
 namespace PaysonAPI;
 
+/* this place is a mess */
+
 /**
  * Represents an order item
  * 
@@ -38,7 +40,6 @@ class OrderItem
 
     /**
      * Returns the description of the order item
-     * 
      * @return string
      */
     public function getDescription() {
@@ -47,7 +48,6 @@ class OrderItem
 
     /**
      * Price of item. <strong>Note: </strong>Not including vat
-     * 
      * @return type
      */
     public function getUnitPrice() {
@@ -56,7 +56,6 @@ class OrderItem
 
     /**
      * Quantity of this item
-     * 
      * @return type
      */
     public function getQuantity() {
@@ -66,7 +65,6 @@ class OrderItem
     /**
      * Returns the tax as a decimal value. Multiply this with 100
      * to get actual tax value.
-     * 
      * @return type Tax value
      */
     public function getTaxPercentage() {
@@ -75,7 +73,6 @@ class OrderItem
 
     /**
      * Returns the Sku of the order item
-     * 
      * @return string
      */
     public function getSku() {
@@ -84,11 +81,11 @@ class OrderItem
 
     /**
      * Parses an object into an array containing OrderItem objects
-     * 
      * @param type $data
      * @return array|\OrderItem
      */
-    public static function parseOrderItems($data) {
+    public static function parseOrderItems($data) 
+    {
         $items = array();
         $i = 0;
 
@@ -124,7 +121,6 @@ class OrderItem
     }
 
     /**
-     * 
      * @return string A string representation of an OrderItem object
      */
     public function __toString() {

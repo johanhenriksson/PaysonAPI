@@ -3,14 +3,15 @@ namespace PaysonAPI;
 
 class PayData 
 {
-    // Required
+    /* Required fields */
     protected $returnUrl;
     protected $cancelUrl;
     protected $ipnUrl;
     protected $memo;
     protected $sender;
     protected $receivers;
-    // Optional
+
+    /* Optional fields */
     protected $localeCode;
     protected $currencyCode;
     protected $orderItems;
@@ -22,8 +23,8 @@ class PayData
     protected $feesPayer;
     protected $showReceiptPage;
     
-
-    public function __construct($returnUrl, $cancelUrl, $ipnUrl, $memo, $sender, $receivers) {
+    public function __construct($returnUrl, $cancelUrl, $ipnUrl, $memo, $sender, $receivers) 
+    {
         $this->setReturnUrl($returnUrl);
         $this->setCancelUrl($cancelUrl);
         $this->setIpnUrl($ipnUrl);
@@ -53,23 +54,16 @@ class PayData
         $this->memo = $memo;
     }
 
-    public function setSender($sender) {
-        if (get_class($sender) != "Sender") {
-            throw new PaysonApiException("Object not of type Sender");
-        }
-
+    public function setSender(Sender $sender) {
         $this->sender = $sender;
     }
 
-    public function setReceivers($receivers) {
-        if (!is_array($receivers))
-            throw new PaysonApiException("Parameter must be an array of Receivers");
-
+    public function setReceivers(array $receivers) 
+    {
         foreach ($receivers as $receiver) {
-            if (get_class($receiver) != "Receiver")
+            if (get_class($receiver) != 'PaysonAPI\Receiver')
                 throw new PaysonApiException("Parameter must be an array of Receivers");
         }
-
         $this->receivers = $receivers;
     }
 
@@ -81,32 +75,25 @@ class PayData
         $this->currencyCode = $currencyCode;
     }
 
-    public function setFeesPayer($feesPayer) {
+    public function setFeesPayer(FeesPayer $feesPayer) {
         $this->feesPayer = $feesPayer;
     }
 
-    public function setOrderItems($items) {
-        if (!is_array($items))
-            throw new PaysonApiException("Parameter must be an array of OrderItems");
-
+    public function setOrderItems(array $items) 
+    {
         foreach ($items as $item) {
-            if (get_class($item) != "OrderItem")
+            if (get_class($item) != 'PaysonAPI\OrderItem')
                 throw new PaysonApiException("Parameter must be an array of OrderItems");
         }
-
         $this->orderItems = $items;
     }
 
-    public function setFundingConstraints($constraints) {
-        if (!is_array($constraints))
-            throw new PaysonApiException("Parameter must be an array of funding constraints");
-
+    public function setFundingConstraints(array $constraints) {
         $this->fundingConstraints = $constraints;
     }
 
     /**
      * (Optional) Invoice fee to charge customer 
-     * 
      * @param type $invoiceFee
      */
     public function setInvoiceFee($invoiceFee) {
@@ -115,7 +102,6 @@ class PayData
 
     /**
      * Can be any string value. This value will be returned in calls to PaymentDetails.
-     * 
      * @param string $custom
      */
     public function setCustom($custom) {
@@ -124,7 +110,6 @@ class PayData
 
     /**
      * (Optional) Your own tracking number.
-     * 
      * @param string $trackingId
      */
     public function setTrackingId($trackingId) {
@@ -134,7 +119,6 @@ class PayData
     /**
      * (Optional) Indicates whether Payson Guarantee is offered or not.
      * Can be one of the following values; OPTIONAL (default), REQUIRED, NO
-     * 
      * @param string $guaranteeOffered
      */
     public function setGuaranteeOffered($guaranteeOffered) {
@@ -143,7 +127,6 @@ class PayData
 
     /**
      * Prepares PayData object for sending by creating an array
-     * 
      * @return array
      */
     public function getOutput() {
@@ -199,7 +182,5 @@ class PayData
         
         return $output;
     }
-
 }
-
 ?>

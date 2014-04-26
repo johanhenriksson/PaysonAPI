@@ -6,14 +6,12 @@ class PayResponse
     protected $responseEnvelope;
     protected $token;
 
-    public function __construct($responseData) {
+    public function __construct($responseData) 
+    {
         $this->responseEnvelope = new ResponseEnvelope($responseData);
-
-        if (isset($responseData["TOKEN"])) {
+        $this->token = "";
+        if (isset($responseData["TOKEN"]))
             $this->token = $responseData["TOKEN"];
-        } else {
-            $this->token = "";
-        }
     }
 
     /**
@@ -29,7 +27,6 @@ class PayResponse
     }
 
     public function __toString() {
-
         return $this->responseEnvelope->__toString() .
                 "token: " . $this->token;
     }
