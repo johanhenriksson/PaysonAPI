@@ -1,7 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-class Receiver {
-
+class Receiver 
+{
     protected $email;
     protected $amount;
     protected $firstName;
@@ -81,7 +82,5 @@ class Receiver {
     public function __toString() {
         return "email: " . $this->email . " amount: " . $this->amount;
     }
-
 }
-
 ?>

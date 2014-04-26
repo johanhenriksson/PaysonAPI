@@ -1,4 +1,5 @@
 <?php
+namespace PaysonAPI;
 
 /*
  * Encodes a name value pair collection to a string of format 'name1=value1&name2=value2',

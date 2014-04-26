@@ -1,4 +1,5 @@
 <?php
+namespace PaysonAPI;
 
 /**
  * Represents an order item
@@ -6,8 +7,8 @@
  * Note:  Order Items are required for INVOICE payments and optional for other payment types. Also, please note that 
  * the total sum of all order items amount (inc. VAT) must match the total sum of all receivers amount.
  */
-class OrderItem {
-
+class OrderItem 
+{
     protected $description;
     protected $unitPrice;
     protected $quantity;
@@ -133,7 +134,5 @@ class OrderItem {
                 " taxPercentage: " . $this->taxPercentage .
                 " sku: " . $this->sku;
     }
-
 }
-
 ?>

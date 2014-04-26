@@ -1,11 +1,12 @@
 <?php
+namespace PaysonAPI;
 
 /*
  * Container class for credentials used to log in via Payson API.
  */
 
-class PaysonCredentials {
-
+class PaysonCredentials 
+{
     protected $userId;
     protected $password;
     protected $applicationId;
@@ -50,7 +51,5 @@ class PaysonCredentials {
             'PAYSON-MODULE-INFO:       ' . $this->ModuleInfo()
         );
     }
-
 }
-
 ?>

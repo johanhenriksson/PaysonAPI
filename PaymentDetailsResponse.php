@@ -1,12 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-require_once "responseenvelope.php";
-require_once "orderitem.php";
-require_once "receiver.php";
-require_once "paymentdetails.php";
-
-class PaymentDetailsResponse {
-
+class PaymentDetailsResponse 
+{
     protected $responseEnvelope;
     protected $paymentDetails;
 

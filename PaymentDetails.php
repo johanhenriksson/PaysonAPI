@@ -1,7 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-class PaymentDetails {
-
+class PaymentDetails 
+{
     protected $orderItems;
     protected $receivers;
     protected $token;

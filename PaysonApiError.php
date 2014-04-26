@@ -1,7 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-class PaysonApiError {
-
+class PaysonApiError 
+{
     protected $errorId;
     protected $message;
     protected $parameter;
@@ -29,7 +30,5 @@ class PaysonApiError {
                 " Message: " . $this->getMessage() .
                 " Parameter: " . $this->getParameter();
     }
-
 }
-
 ?>

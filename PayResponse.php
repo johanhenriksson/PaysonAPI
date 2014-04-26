@@ -1,9 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-require_once "responseenvelope.php";
-
-class PayResponse {
-
+class PayResponse 
+{
     protected $responseEnvelope;
     protected $token;
 
@@ -34,7 +33,5 @@ class PayResponse {
         return $this->responseEnvelope->__toString() .
                 "token: " . $this->token;
     }
-
 }
-
 ?>

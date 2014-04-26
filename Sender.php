@@ -1,7 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-class Sender {
-
+class Sender 
+{
     protected $email;
     protected $firstName;
     protected $lastName;
@@ -29,7 +30,5 @@ class Sender {
         $output["senderFirstName"] = $this->getFirstName();
         $output["senderLastName"] = $this->getLastName();
     }
-
 }
-
 ?>

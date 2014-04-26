@@ -1,9 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-require_once "responseenvelope.php";
-
-class PaymentUpdateResponse {
-
+class PaymentUpdateResponse 
+{
     protected $responseEnvelope;
 
     public function __construct($responseData) {
@@ -17,7 +16,5 @@ class PaymentUpdateResponse {
     public function __toString() {
         return $this->responseEnvelope->__toString();
     }
-
 }
-
 ?>

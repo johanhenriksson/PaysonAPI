@@ -1,7 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-class PayData {
-
+class PayData 
+{
     // Required
     protected $returnUrl;
     protected $cancelUrl;

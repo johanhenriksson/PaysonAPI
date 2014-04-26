@@ -1,7 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-class PaymentDetailsData {
-
+class PaymentDetailsData 
+{
     protected $token;
 
     public function __construct($token) {
@@ -10,12 +11,8 @@ class PaymentDetailsData {
 
     public function getOutput() {
         $output = array();
-
         $output["token"] = $this->token;
-
         return $output;
     }
-
 }
-
 ?>

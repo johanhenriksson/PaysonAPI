@@ -1,7 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-class ResponseEnvelope {
-
+class ResponseEnvelope 
+{
     protected $ack;
     protected $timestamp;
     protected $errors;
@@ -56,7 +57,5 @@ class ResponseEnvelope {
 
         return $errors;
     }
-
 }
-
 ?>

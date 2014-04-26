@@ -1,9 +1,8 @@
 <?php
+namespace PaysonAPI;
 
-require_once "paymentdetails.php";
-
-class ValidateResponse {
-
+class ValidateResponse 
+{
     protected $response;
     protected $paymentDetails;
 
@@ -30,7 +29,5 @@ class ValidateResponse {
     public function getPaymentDetails() {
         return $this->paymentDetails;
     }
-
 }
-
 ?>
