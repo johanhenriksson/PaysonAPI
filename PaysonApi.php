@@ -110,6 +110,10 @@ class PaysonApi
         return sprintf($this->protocol, static::PAYSON_WWW_HOST . sprintf(self::PAYSON_WWW_PAY_FORWARD_URL, $payResponse->getToken()));
     }
 
+    protected function getCurlUrl($url) {
+        return sprintf($this->protocol, static::PAYSON_API_ENDPOINT . $url);
+    }
+
     private function doRequest($url, PaysonCredentials $credentials, $postData) 
     {
         if (!function_exists('curl_exec'))
@@ -117,7 +121,7 @@ class PaysonApi
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_HTTPHEADER, $credentials->toHeader());
-        curl_setopt($ch, CURLOPT_URL, sprintf($this->protocol, static::PAYSON_API_ENDPOINT . $url));
+        curl_setopt($ch, CURLOPT_URL, $this->getCurlUrl($url));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);

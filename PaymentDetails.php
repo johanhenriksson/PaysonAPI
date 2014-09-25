@@ -50,7 +50,7 @@ class PaymentDetails
     }
 
     protected function getResponseField(array &$response, $field) {
-        if isset($response[$field])
+        if (isset($response[$field]))
             return $response[$field];
         return "";
     }
