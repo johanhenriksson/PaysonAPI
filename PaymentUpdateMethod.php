@@ -10,6 +10,9 @@ class PaymentUpdateMethod
 
     public static function ConstantToString($value) 
     {
+        if (!is_numeric($value))
+            throw new PaysonApiException("Invalid constant - must be numeric");
+         
         switch ($value) {
             case self::CancelOrder:
                 return "CANCELORDER";
@@ -19,6 +22,7 @@ class PaymentUpdateMethod
                 return "CREDITORDER";
             case self::Refund:
                 return "REFUND";
+
             default:
                 throw new PaysonApiException("Invalid constant");
         }
