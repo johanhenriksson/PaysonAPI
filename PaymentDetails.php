@@ -26,7 +26,7 @@ class PaymentDetails
 
     public function __construct($responseData) 
     {
-        $this->orderItems = OrderItem::parseOrderItems($responseData);
+        $this->orderItems = @OrderItem::parseOrderItems($responseData);
         $this->receivers = Receiver::parseReceivers($responseData);
 
         $this->token                        = $this->getResponseField($responseData, "token");
